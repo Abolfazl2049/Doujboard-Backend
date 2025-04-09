@@ -5,7 +5,7 @@ import path from "path";
 import {authDb} from "#src/services/auth/db.js";
 import {PassportStatic} from "passport";
 
-const PUB_KEY = fs.readFileSync(path.join(import.meta.dirname, "../../", "pub_key.pem"), "utf8");
+const PUB_KEY = fs.readFileSync(path.resolve("pub_key.pem"), "utf8");
 
 const options = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),

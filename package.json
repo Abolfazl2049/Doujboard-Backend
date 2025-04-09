@@ -10,7 +10,7 @@
     "compile": "npx tsc",
     "minify": "node scripts/terser-minify.js",
     "build": "yarn compile && yarn minify",
-    "render" : "yarn && yarn build" , 
+    "render": "yarn && yarn build",
     "swagger": "tsx scripts/swagger.ts"
   },
   "keywords": [],

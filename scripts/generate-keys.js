@@ -17,9 +17,9 @@ function genKeyPair() {
     }
   });
 
-  fs.writeFileSync(path.resolve(import.meta.dirname  ,'..') + "/pub_key.pem", keyPair.publicKey);
+  fs.writeFileSync(path.resolve("pub_key.pem"), keyPair.publicKey);
 
-  fs.writeFileSync(path.resolve(import.meta.dirname , '..') + "/priv_key.pem", keyPair.privateKey);
+  fs.writeFileSync(path.resolve(priv_key.pem), keyPair.privateKey);
 }
 
 genKeyPair();

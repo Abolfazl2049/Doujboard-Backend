@@ -3,7 +3,7 @@ import jsonwebtoken from "jsonwebtoken";
 import fs from "fs";
 import path from "path";
 
-const PRIV_KEY = fs.readFileSync(path.join(import.meta.dirname, "../../../", "priv_key.pem"), "utf8");
+const PRIV_KEY = fs.readFileSync(path.resolve("priv_key.pem"), "utf8");
 
 function validPassword(password: string, hash: string, salt: string) {
   var hashVerify = crypto.pbkdf2Sync(password, salt, 10000, 64, "sha512").toString("hex");
@@ -21,7 +21,6 @@ function genPassword(password: string) {
 }
 
 function issueJWT(user: any) {
-
   const expiresIn = "1d";
 
   const signedToken = jsonwebtoken.sign(

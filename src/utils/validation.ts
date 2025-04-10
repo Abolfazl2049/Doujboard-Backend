@@ -1,7 +1,7 @@
 import {Request} from "express";
 import {validationResult} from "express-validator";
 
-let validateReq = (req: Request) => {
+let validateReqSchema = (req: Request) => {
   const errors = validationResult(req);
   if (!errors.isEmpty())
     throw {
@@ -9,4 +9,4 @@ let validateReq = (req: Request) => {
       message: errors.array()
     };
 };
-export {validateReq};
+export {validateReqSchema};

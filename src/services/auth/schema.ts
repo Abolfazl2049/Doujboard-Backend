@@ -2,17 +2,11 @@ import {checkSchema} from "express-validator";
 const LoginRegisterSchema = checkSchema({
   username: {
     in: "body",
-    isString: true,
-    notEmpty: {
-      errorMessage: "Provide a username"
-    }
+    isString: true
   },
   password: {
     in: "body",
-    isString: true,
-    notEmpty: {
-      errorMessage: "Provide a password"
-    }
+    isString: true
   }
 });
 export {LoginRegisterSchema};

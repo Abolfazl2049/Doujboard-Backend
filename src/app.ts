@@ -1,7 +1,7 @@
 import "dotenv/config";
 import express from "express";
 import passport from "passport";
-import {sequelize} from "./tools/sequelize.js";
+import sequelize from "./tools/sequelize.js";
 import cors from "cors";
 import {errorHandler} from "./middlewares/error-handler.js";
 import {appRouter} from "./router.js";

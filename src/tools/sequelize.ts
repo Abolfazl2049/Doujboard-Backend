@@ -4,6 +4,6 @@ import {Sequelize} from "sequelize";
 const sequelize = new Sequelize({
   dialect: "sqlite",
   storage: path.resolve("data/app.db"),
-  logging: false 
+  logging: false
 });
-export {sequelize};
+export default sequelize;

@@ -26,7 +26,7 @@ let getUser = async (username: string) => {
   }
 };
 
-export const authDb = {
+export default {
   User,
   getUser
 };

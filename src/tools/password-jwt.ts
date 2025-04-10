@@ -2,7 +2,7 @@ import {Strategy as JwtStrategy} from "passport-jwt";
 import {ExtractJwt} from "passport-jwt";
 import fs from "fs";
 import path from "path";
-import {authDb} from "#src/services/auth/db.js";
+import authDb from "#src/services/auth/db.js";
 import {PassportStatic} from "passport";
 
 const PUB_KEY = fs.readFileSync(path.resolve("pub_key.pem"), "utf8");

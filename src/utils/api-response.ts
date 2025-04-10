@@ -1,7 +1,7 @@
 import {logResponse} from "#src/middlewares/logger.js";
 import {Request, Response} from "express";
 
-export const sendApiResponse = (
+export const sendRes = (
   req: Request,
   res: Response,
   apiRes: {

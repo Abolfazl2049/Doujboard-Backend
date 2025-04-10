@@ -1,11 +1,11 @@
 import express from "express";
-import {authService} from "./index.js";
-import {sendApiResponse} from "#src/utils/api-response.js";
+import authService from "./app.js";
+import {sendRes} from "#src/utils/api-response.js";
 import {LoginRegisterSchema} from "./schema.js";
 const router = express.Router();
 
 router.get("/protected", (req, res, next) => {
-  sendApiResponse(req, res, {
+  sendRes(req, res, {
     ok: true,
     data: {
       message: "you are authenticated"

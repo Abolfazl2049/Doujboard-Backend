@@ -1,7 +1,7 @@
 import {NextFunction, Request, Response} from "express";
 import {genPassword, issueJWT, validPassword} from "./lib.js";
-import {authDb} from "./db.js";
-import {sendApiResponse} from "#src/utils/api-response.js";
+import authDb from "./db.js";
+import {sendRes} from "#src/utils/api-response.js";
 
 let register = async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -15,7 +15,7 @@ let register = async (req: Request, res: Response, next: NextFunction) => {
       hash: hash,
       salt: salt
     });
-    sendApiResponse(req, res, {ok: true, data: user});
+    sendRes(req, res, {ok: true, data: user});
   } catch (err) {
     next(err);
   }
@@ -40,7 +40,7 @@ let login = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-export const authService = {
+export default {
   register,
   login
 };

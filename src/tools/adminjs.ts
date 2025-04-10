@@ -2,7 +2,8 @@ import AdminJS, {DefaultAuthProvider} from "adminjs";
 import AdminJSExpress from "@adminjs/express";
 import * as AdminJSSequelize from "@adminjs/sequelize";
 import {dark, light, noSidebar} from "@adminjs/themes";
-import {authDb} from "#src/services/auth/db.js";
+import authDb from "#src/services/auth/db.js";
+import doujDb from "#src/services/douj/db.js";
 const authenticate = (data: {email: string; password: string}, ctx: any) => {
   if (data.email === "admin" && data.password === "abooliIsKing") return {email: data.email};
   else return null;
@@ -18,7 +19,7 @@ AdminJS.registerAdapter({
 });
 
 const admin = new AdminJS({
-  resources: [authDb.User],
+  resources: [authDb.User, doujDb.Category, doujDb.Douj],
   defaultTheme: light.id,
   availableThemes: [dark, light, noSidebar],
   branding: {

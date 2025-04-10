@@ -1,6 +1,7 @@
 import express from "express";
 import {authService} from "./index.js";
 import {sendApiResponse} from "#src/utils/api-response.js";
+import {LoginRegisterSchema} from "./schema.js";
 const router = express.Router();
 
 router.get("/protected", (req, res, next) => {
@@ -13,21 +14,9 @@ router.get("/protected", (req, res, next) => {
 });
 
 // Validate an existing user and issue a JWT
-router.post("/login", function (req, res, next) {
-  try {
-    authService.login(req, res);
-  } catch (err) {
-    next(err);
-  }
-});
+router.post("/login", LoginRegisterSchema, authService.login);
 
 // Register a new user
-router.post("/register", async (req, res, next) => {
-  try {
-    authService.register(req, res);
-  } catch (err) {
-    next(err);
-  }
-});
+router.post("/register", LoginRegisterSchema, authService.register);
 
 export default router;

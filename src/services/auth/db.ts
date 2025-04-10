@@ -16,20 +16,14 @@ const User = sequelize.define("User", {
 });
 
 let getUser = async (username: string) => {
-  if (username) {
-    try {
-      return await User.findOne({where: {username}});
-    } catch {
-      throw {
-        status: 404,
-        message: "you're not in my database clown ,sign up first"
-      };
-    }
-  } else
+  try {
+    return await User.findOne({where: {username}});
+  } catch {
     throw {
-      status: 400,
-      message: "provide a fucking username"
+      status: 404,
+      message: "you're not in my database clown ,sign up first"
     };
+  }
 };
 
 export const authDb = {

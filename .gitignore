@@ -9,3 +9,4 @@ yarn.lock
 .env
 priv_key.pem
 pub_key.pem
+media

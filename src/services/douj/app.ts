@@ -21,7 +21,17 @@ const getCategoryList = async (req: Request, res: Response, next: NextFunction) 
   }
 };
 
+const newDouj = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    console.log(req.file);
+    res.send(req.file?.path.split("public")[1].replaceAll("\\", "/"));
+  } catch (err) {
+    next(err);
+  }
+};
+
 export default {
   getList,
-  getCategoryList
+  getCategoryList,
+  newDouj
 };

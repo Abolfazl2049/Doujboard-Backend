@@ -2,7 +2,7 @@ import {checkSchema} from "express-validator";
 const newDoujSchema = checkSchema({
   img: {
     isEmpty: {
-      errorMessage: "Provide a Img"
+      errorMessage: "Provide an Img"
     }
   },
   title: {

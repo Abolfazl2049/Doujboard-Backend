@@ -27,18 +27,17 @@ let register = async (req: Request, res: Response, next: NextFunction) => {
 let login = async (req: Request, res: Response, next: NextFunction) => {
   try {
     validateReqSchema(req);
-    authDb.getUser(req.body.username).then((user: any) => {
-      const isValid = validPassword(req.body.password, user.hash, user.salt);
+    let user = await authDb.getUser(req.body.username);
+    const isValid = validPassword(req.body.password, user.hash, user.salt);
 
-      if (isValid) {
-        const tokenObject = issueJWT(user);
-        res.status(200).json({success: true, token: tokenObject.token, expiresIn: tokenObject.expires});
-      } else
-        throw {
-          status: 401,
-          message: "you entered the wrong password"
-        };
-    });
+    if (isValid) {
+      const tokenObject = issueJWT(user);
+      res.status(200).json({success: true, token: tokenObject.token, expiresIn: tokenObject.expires});
+    } else
+      throw {
+        status: 401,
+        message: "you entered the wrong password"
+      };
   } catch (err) {
     next(err);
   }

@@ -41,6 +41,9 @@ app.use(requestLogger);
 // app router
 app.use(appRouter);
 
+// static files
+app.use(express.static("public"));
+
 // error handler
 app.use(errorHandler);
 

@@ -1,24 +1,25 @@
 import {checkSchema} from "express-validator";
 const newDoujSchema = checkSchema({
-  img: {
-    isEmpty: {
-      errorMessage: "Provide an Img"
-    }
-  },
   title: {
+    in: "body",
     isString: true
   },
   hidden: {
-    isBoolean: true
+    in: "body",
+    optional: true,
+    isBoolean: true,
+    default: false
   },
   category: {
+    in: "body",
     isNumeric: true
   }
 });
 
 const newCategorySchema = checkSchema({
-  user: {
-    isNumeric: true
+  name: {
+    isString: true,
+    in: "body"
   }
 });
 

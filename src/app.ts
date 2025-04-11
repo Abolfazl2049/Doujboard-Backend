@@ -12,7 +12,8 @@ import {appConfig} from "./config.js";
 import configJwtPassport from "./tools/password-jwt.js";
 import routeProtector from "./middlewares/route-protector.js";
 import {requestLogger} from "./middlewares/logger.js";
-
+import os from "os";
+import expressFormdata from "express-form-data";
 const app = express();
 const swaggerJsonFilePath = await import("../swagger_output.json", {
   with: {type: "json"}
@@ -30,6 +31,8 @@ app.use(applyLimiter());
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
+// app.use(expressFormdata.parse({uploadDir: os.tmpdir(), autoClean: true}));
+// app.use(expressFormdata.union());
 
 //swagger route
 app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerJsonFilePath));

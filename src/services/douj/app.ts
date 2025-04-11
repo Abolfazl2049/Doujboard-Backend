@@ -1,6 +1,8 @@
 import {NextFunction, Request, Response} from "express";
 import doujDb from "./db.js";
 import {sendRes} from "#src/utils/api-response.js";
+import {parseFilePath} from "#src/utils/multer.js";
+import {validateReqSchema} from "#src/utils/validation.js";
 
 const getList = async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -23,8 +25,25 @@ const getCategoryList = async (req: Request, res: Response, next: NextFunction) 
 
 const newDouj = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    console.log(req.file);
-    res.send(req.file?.path.split("public")[1].replaceAll("\\", "/"));
+    validateReqSchema(req);
+    let newDouj = await doujDb.Douj.create({
+      category: req.body.category,
+      title: req.body.title,
+      img: parseFilePath(req),
+      hidden: req.body.hidden,
+      description: req.body.description ?? null
+    });
+    sendRes(req, res, {ok: true, data: newDouj});
+  } catch (err) {
+    next(err);
+  }
+};
+
+let newCategory = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    validateReqSchema(req);
+    let newCategory = await doujDb.Category.create({user: req.user.id, name: req.body.name});
+    sendRes(req, res, {ok: true, data: newCategory});
   } catch (err) {
     next(err);
   }
@@ -33,5 +52,6 @@ const newDouj = async (req: Request, res: Response, next: NextFunction) => {
 export default {
   getList,
   getCategoryList,
-  newDouj
+  newDouj,
+  newCategory
 };

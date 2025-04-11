@@ -5,9 +5,11 @@ import authDb from "#services/auth/db.js";
 const Category = sequelize.define("Category", {
   id: {
     primaryKey: true,
-    type: DataTypes.INTEGER
+    type: DataTypes.INTEGER,
+    autoIncrement: true
   },
-  user: DataTypes.INTEGER
+  user: DataTypes.INTEGER,
+  name: DataTypes.STRING
 });
 authDb.User.hasMany(Category, {
   foreignKey: "user"
@@ -19,16 +21,17 @@ Category.belongsTo(authDb.User, {
 const Douj = sequelize.define("Douj", {
   id: {
     primaryKey: true,
-    type: DataTypes.INTEGER
+    type: DataTypes.INTEGER,
+    autoIncrement: true
   },
-  img: DataTypes.STRING,
+  category: DataTypes.INTEGER,
   title: DataTypes.STRING,
+  img: DataTypes.STRING,
+  hidden: DataTypes.BOOLEAN,
   description: {
     allowNull: true,
     type: DataTypes.TEXT
-  },
-  hidden: DataTypes.BOOLEAN,
-  category: DataTypes.INTEGER
+  }
 });
 Category.hasMany(Douj, {
   foreignKey: "category"

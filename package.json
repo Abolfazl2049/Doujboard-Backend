@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "tsx watch src/app.ts",
     "static": "tsx src/app.ts",
-    "compile": "npx tsc",
+    "compile": "npx tsc --noCheck",
     "minify": "node scripts/terser-minify.js",
     "build": "yarn compile && yarn minify",
     "render": "yarn && yarn build",

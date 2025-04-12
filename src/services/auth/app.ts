@@ -18,7 +18,7 @@ let register = async (req: Request, res: Response, next: NextFunction) => {
       hash: hash,
       salt: salt
     });
-    sendRes(req, res, {ok: true, data: user});
+    sendRes(req, res, user);
   } catch (err) {
     next(err);
   }

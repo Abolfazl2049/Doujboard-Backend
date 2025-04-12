@@ -17,7 +17,7 @@ const getCategoryList = async (req: Request, res: Response, next: NextFunction) 
   try {
     // @ts-ignore
     let categories = await doujDb.Category.findAll({where: {user: req.user.id}});
-    sendRes(req, res, {ok: true, data: categories});
+    sendRes(req, res, categories);
   } catch (err) {
     next(err);
   }
@@ -26,6 +26,11 @@ const getCategoryList = async (req: Request, res: Response, next: NextFunction) 
 const newDouj = async (req: Request, res: Response, next: NextFunction) => {
   try {
     validateReqSchema(req);
+    if (!req.file)
+      throw {
+        status: 400,
+        message: "Img field is necessary"
+      };
     let newDouj = await doujDb.Douj.create({
       category: req.body.category,
       title: req.body.title,
@@ -33,7 +38,7 @@ const newDouj = async (req: Request, res: Response, next: NextFunction) => {
       hidden: req.body.hidden,
       description: req.body.description ?? null
     });
-    sendRes(req, res, {ok: true, data: newDouj});
+    sendRes(req, res, newDouj);
   } catch (err) {
     next(err);
   }
@@ -43,7 +48,7 @@ let newCategory = async (req: Request, res: Response, next: NextFunction) => {
   try {
     validateReqSchema(req);
     let newCategory = await doujDb.Category.create({user: req.user.id, name: req.body.name});
-    sendRes(req, res, {ok: true, data: newCategory});
+    sendRes(req, res, newCategory );
   } catch (err) {
     next(err);
   }

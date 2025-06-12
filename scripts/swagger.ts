@@ -4,7 +4,7 @@ import {appConfig} from "#src/config.js";
 const swaggerDocument = {
   info: {
     version: "1.0.0",
-    title: "Godfather Forms"
+    title: "Doujboard Backend"
   },
   host: appConfig.PORT,
   basePath: "/",

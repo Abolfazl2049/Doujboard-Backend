@@ -8,9 +8,9 @@ const doujRouter = Router();
 
 const doujImgUploader = multer({storage: genStorage("public/media/img/douj/")});
 
-doujRouter.get("/category-list", DoujService.getCategoryList);
-doujRouter.get("/list", DoujService.getList);
-doujRouter.post("/new-category", newCategorySchema, DoujService.newCategory);
-doujRouter.post("/new", doujImgUploader.single("img"), newDoujSchema, DoujService.newDouj);
+doujRouter.get("/", DoujService.getList);
+doujRouter.post("/", doujImgUploader.single("img"), newDoujSchema, DoujService.newDouj);
+doujRouter.get("/category", DoujService.getCategoryList);
+doujRouter.post("/category", newCategorySchema, DoujService.newCategory);
 
 export default doujRouter;

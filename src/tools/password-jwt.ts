@@ -16,7 +16,7 @@ const options = {
 let configJwtPassport = (passport: PassportStatic) => {
   passport.use(
     new JwtStrategy(options as any, function (payload: any, done: Function) {
-      authDb.User.findOne({where: {id: payload.sub}})
+      authDb.User.findOne({where: {id: payload.sub}  , attributes : ['username'  , 'id' , 'createdAt']})
         .then(user => {
           if (user) return done(null, user);
           else return done(null, false);

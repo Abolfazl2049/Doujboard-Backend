@@ -41,7 +41,7 @@ let login = async (req: Request, res: Response, next: NextFunction) => {
     } else
       throw {
         status: 401,
-        message: "you entered the wrong password"
+        message: "you entered the wrong password or username"
       };
   } catch (err) {
     next(err);

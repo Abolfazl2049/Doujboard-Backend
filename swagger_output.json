@@ -2,15 +2,21 @@
   "swagger": "2.0",
   "info": {
     "version": "1.0.0",
-    "title": "Godfather Forms",
+    "title": "Doujboard Backend",
     "description": ""
   },
   "host": 3000,
   "basePath": "/",
-  "schemes": ["http"],
+  "schemes": [
+    "http"
+  ],
   "securityDefinitions": {},
-  "consumes": ["application/json"],
-  "produces": ["application/json"],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "paths": {
     "/": {
       "get": {
@@ -76,7 +82,7 @@
         }
       }
     },
-    "/douj/category-list": {
+    "/douj/": {
       "get": {
         "description": "",
         "responses": {
@@ -84,43 +90,7 @@
             "description": ""
           }
         }
-      }
-    },
-    "/douj/list": {
-      "get": {
-        "description": "",
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      }
-    },
-    "/douj/new-category": {
-      "post": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "example": "any"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      }
-    },
-    "/douj/new": {
+      },
       "post": {
         "description": "",
         "parameters": [
@@ -146,6 +116,48 @@
             }
           }
         ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/douj/category": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/user/profile": {
+      "get": {
+        "description": "",
         "responses": {
           "default": {
             "description": ""

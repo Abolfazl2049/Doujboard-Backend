@@ -9,7 +9,7 @@ const Category = sequelize.define("Category", {
     autoIncrement: true
   },
   user: DataTypes.INTEGER,
-  name: DataTypes.STRING
+  name: DataTypes.STRING(12)
 });
 authDb.User.hasMany(Category, {
   foreignKey: "user"
@@ -31,7 +31,8 @@ const Douj = sequelize.define("Douj", {
   description: {
     allowNull: true,
     type: DataTypes.TEXT
-  }
+  },
+  link: DataTypes.STRING
 });
 Category.hasMany(Douj, {
   foreignKey: "category"

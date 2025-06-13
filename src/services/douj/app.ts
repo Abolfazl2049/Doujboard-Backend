@@ -6,8 +6,8 @@ import {validateReqSchema} from "#src/utils/validation.js";
 
 const getList = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    let doujs = await doujDb.Douj.findAll({where: {category: req.params.category}});
-    sendRes(req, res, {ok: true, data: doujs});
+    let doujs = await doujDb.Douj.findAll({where: {category: req.query.category}});
+    sendRes(req, res, doujs);
   } catch (err) {
     next(err);
   }
@@ -31,12 +31,14 @@ const newDouj = async (req: Request, res: Response, next: NextFunction) => {
         status: 400,
         message: "Img field is necessary"
       };
+    console.log(typeof req.body.hidden);
     let newDouj = await doujDb.Douj.create({
       category: req.body.category,
       title: req.body.title,
       img: parseFilePath(req),
       hidden: req.body.hidden,
-      description: req.body.description ?? null
+      description: req.body.description ?? null,
+      link: req.body.link
     });
     sendRes(req, res, newDouj);
   } catch (err) {
@@ -48,7 +50,7 @@ let newCategory = async (req: Request, res: Response, next: NextFunction) => {
   try {
     validateReqSchema(req);
     let newCategory = await doujDb.Category.create({user: req.user.id, name: req.body.name});
-    sendRes(req, res, newCategory );
+    sendRes(req, res, newCategory);
   } catch (err) {
     next(err);
   }

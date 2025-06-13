@@ -13,6 +13,10 @@ const newDoujSchema = checkSchema({
   category: {
     in: "body",
     isNumeric: true
+  },
+  link: {
+    in: "body",
+    isString: true
   }
 });
 

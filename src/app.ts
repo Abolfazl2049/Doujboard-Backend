@@ -20,15 +20,18 @@ const swaggerJsonFilePath = await import("../swagger_output.json", {
 // adminsjs setup
 app.use(admin.options.rootPath, adminRouter);
 
-// passport js config
-configJwtPassport(passport);
-app.use(passport.initialize());
-
 //  app basic settings
 app.use(applyLimiter());
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
+
+// static files
+app.use(express.static("public"));
+
+// passport js config
+configJwtPassport(passport);
+app.use(passport.initialize());
 
 //swagger route
 app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerJsonFilePath));
@@ -39,9 +42,6 @@ app.use(requestLogger);
 
 // app router
 app.use(appRouter);
-
-// static files
-app.use(express.static("public"));
 
 // error handler
 app.use(errorHandler);

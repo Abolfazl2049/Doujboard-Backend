@@ -20,8 +20,8 @@ let getUser = async (username: string) => {
     return await User.findOne({where: {username}});
   } catch {
     throw {
-      status: 404,
-      message: "you're not in my database clown ,sign up first"
+      status: 401,
+      message: "wrong password or username"
     };
   }
 };

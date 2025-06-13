@@ -17,7 +17,9 @@ const User = sequelize.define("User", {
 
 let getUser = async (username: string) => {
   try {
-    return await User.findOne({where: {username}});
+    let u = await User.findOne({where: {username}});
+    if (u) return u;
+    else throw "401";
   } catch {
     throw {
       status: 401,

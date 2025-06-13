@@ -2,7 +2,7 @@ import {Strategy as JwtStrategy} from "passport-jwt";
 import {ExtractJwt} from "passport-jwt";
 import fs from "fs";
 import path from "path";
-import authDb from "#src/services/auth/db.js";
+import userDb from "#src/services/user/db.js";
 import {PassportStatic} from "passport";
 
 const PUB_KEY = fs.readFileSync(path.resolve("pub_key.pem"), "utf8");
@@ -16,7 +16,7 @@ const options = {
 let configJwtPassport = (passport: PassportStatic) => {
   passport.use(
     new JwtStrategy(options as any, function (payload: any, done: Function) {
-      authDb.User.findOne({where: {id: payload.sub}  , attributes : ['username'  , 'id' , 'createdAt']})
+      userDb.User.findOne({where: {id: payload.sub}  , attributes : ['username'  , 'id' , 'createdAt']})
         .then(user => {
           if (user) return done(null, user);
           else return done(null, false);
